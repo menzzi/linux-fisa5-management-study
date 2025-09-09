@@ -144,3 +144,63 @@ ubuntu@myserver00:~$ sudo diff -u /etc/ssh/sshd_config /home/ubuntu/sshd_config_
  - ssh 포트 22번 -> 2200번
  - 특정 IP 대역(192.168.0.0/24)에서만 접속 허용.
 
+<br>
+
+## 📝 동적 디렉토리 생성 스크립트 개발
+
+: 리눅스 환경에서 스크립트(script)를 활용하여 반복적인 작업을 자동화
+- 동적 디렉토리 생성 스크립트를 작성
+- 권한 설정 및 실행 테스트
+
+### 🛠️ 스크립트 파일 준비
+
+#### 스크립트 생성 
+```bash
+vi create_today_dir.sh
+```
+#### 스크립트 작성
+```shell
+#!/bin/bash
+
+# 오늘 날짜 (YYYY-MM-DD)를 이름으로 하는 디렉터리를 생성합니다.
+# -p 옵션은 디렉터리가 이미 존재해도 오류를 발생시키지 않습니다.
+mkdir -p "$(date +%Y-%m-%d)"
+
+echo "'$(date +%Y-%m-%d)' 디렉터리를 생성했습니다."
+```
+#### 스크립트 생성 확인
+```bash
+ls -al create_today_dir.sh
+-rw-rw-r-- 1 user1 user1 282 Sep  9 16:51 create_today_dir.sh
+```
+
+### 🔑 실행 권한 부여
+
+: 기본 권한은 644(읽기/쓰기만 가능)였기 때문에 실행 권한을 추가해야 함
+
+```bash
+chmod 744 create_today_dir.sh
+```
+
+**744 권한 의미**
+
+- 소유자(user): 읽기, 쓰기, 실행 (rwx)
+
+- 그룹(group): 읽기 (r--)
+
+- 기타(other): 읽기 (r--)
+
+### ▶️ 실행 및 테스트
+#### 실행
+```bash
+./create_today_dir.sh
+'2025-09-09' 디렉터리를 생성했습니다.
+```
+
+#### 결과 확인
+```bash
+ls
+2025-09-09  create_today_dir.sh
+```
+
+
