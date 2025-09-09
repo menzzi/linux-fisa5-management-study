@@ -97,4 +97,50 @@ ls: cannot open directory '/home/Engineer/': Permission denied
 ```
 <br>
 
+## 🎯 diff를 이용한 설정 파일 변경 추적
+
+#### 준비: 원본 파일 복사
+```bash
+sudo cp /etc/ssh/sshd_config /home/ubuntu/sshd_config_duplication
+
+```
+#### 변경 내용을 확인하기 위해 /etc/ssh/sshd_config_duplication 파일 내용 수정.
+
+```bash
+# 생략...
+#
+Port 2200
+AddressFamily any
+ListenAddress 192.168.0.0/24
+#ListenAddress ::
+# 생략...
+
+```
+#### 설정 변경 내용 확인
+- (-): 원본 파일에서는 있었지만, 새로운 파일에서는 삭제되거나 변경된 줄을 나타냄
+- (+): 새로운 파일에 추가되었거나, 변경된 내용을 나타냄.
+
+```bash
+ubuntu@myserver00:~$ sudo diff -u /etc/ssh/sshd_config /home/ubuntu/sshd_config_duplication
+
+--- /etc/ssh/sshd_config        2025-06-10 02:22:39.000000000 +0900
++++ /home/ubuntu/sshd_config_duplication        2025-09-09 16:07:18.743332930 +0900
+@@ -20,9 +20,9 @@
+ #   systemctl daemon-reload
+ #   systemctl restart ssh.socket
+ #
+-#Port 22
+-#AddressFamily any
+-#ListenAddress 0.0.0.0
++Port 2200
++AddressFamily any
++ListenAddress 192.168.0.0/24
+ #ListenAddress ::
+ #HostKey /etc/ssh/ssh_host_rsa_key
+
+```
+
+➡️ **변경 내용**
+ - ssh 포트 22번 -> 2200번
+ - 특정 IP 대역(192.168.0.0/24)에서만 접속 허용.
 
