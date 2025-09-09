@@ -77,9 +77,9 @@ drwxr-xr-x 7 root root     4096 Sep  9 15:23 ..
 #### 그룹에 속한 사용자의 접근 : ✅ 파일 생성 및 접근 가능
 ```bash
 # user1이 engineer 그룹 소속일 때
-user1@myserver00:~$ touch /home/Engineer/file.txt
+user1@myserver00:~$ touch /home/engineer/file.txt
 user1@myserver00:~$
-user1@myserver00:~$ ls /home/Engineer/file.txt
+user1@myserver00:~$ ls /home/engineer/file.txt
 /home/Engineer/file.txt
 ```
 #### 그룹에 속하지 않은 사용자의 접근 : ❌ 접근 거부 (Permission denied)
@@ -92,8 +92,8 @@ hskim@myserver00:~$ cd /home/engineer
 hskim@myserver00:~$ touch /home/engineer/test.txt
 touch: cannot touch '/home/engineer/test.txt': Permission denied
 
-hskim@myserver00:~$ ls /home/Engineer/
-ls: cannot open directory '/home/Engineer/': Permission denied
+hskim@myserver00:~$ ls /home/engineer/
+ls: cannot open directory '/home/engineer/': Permission denied
 ```
 <br>
 
